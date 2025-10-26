@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌱 Smart Irrigation Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="card">
+  <h2>Soil Moisture & Pump Control</h2>
+  <div class="meter">
+    <div id="soilMeter"></div>
+  </div>
+  <p>Pump Status: <span id="pumpStatus"></span></p>
+  <p>Rain Forecast: <span id="rainForecast"></span> mm</p>
+
+  <!-- Pump Icon -->
+  <div class="pump-container">
+    <div id="pumpIcon" class="pump-off">
+      💧
+    </div>
+  </div>
+</div>
+
+
+      <div class="card">
+        <h2>Live Sensor Data</h2>
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Soil Moisture</th>
+              <th>Temperature</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Soil Moisture Trend</h2>
+        <canvas id="moistureChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>Temperature Trend</h2>
+        <canvas id="temperatureChart"></canvas>
+      </div>
+    </div>
+
+    <footer>Powered by Arduino • Python • AWS • Chart.js</footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
