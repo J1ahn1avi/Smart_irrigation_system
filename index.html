@@ -1,57 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🌱 Smart Irrigation Dashboard</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <div class="card">
-  <h2>Soil Moisture & Pump Control</h2>
-  <div class="meter">
-    <div id="soilMeter"></div>
-  </div>
-  <p>Pump Status: <span id="pumpStatus"></span></p>
-  <p>Rain Forecast: <span id="rainForecast"></span> mm</p>
-
-  <!-- Pump Icon -->
-  <div class="pump-container">
-    <div id="pumpIcon" class="pump-off">
-      💧
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginSection" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-tint"></i>
+                <h1>Smart Irrigation</h1>
+                <p>Monitor and control your irrigation system</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+                </div>
+            </form>
+            
+            <form id="registerForm" class="hidden">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="regUsername" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="regEmail" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="regPassword" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Register</button>
+                <div class="register-link">
+                    <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-</div>
 
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="dashboard hidden">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-tint"></i> Smart Irrigation Dashboard</h1>
+                <div class="header-controls">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell" id="notificationIcon"></i>
+                        <span class="notification-count" id="notificationCount">0</span>
+                    </div>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
 
-      <div class="card">
-        <h2>Live Sensor Data</h2>
-        <table id="dataTable">
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Soil Moisture</th>
-              <th>Temperature</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+        <div class="dashboard-content">
+            <div class="cards-container">
+                <div class="card main-card">
+                    <h2>Soil Moisture & Pump Control</h2>
+                    <div class="meter-container">
+                        <div class="meter">
+                            <div id="soilMeter"></div>
+                        </div>
+                        <div class="meter-labels">
+                            <span>Dry</span>
+                            <span>Optimal</span>
+                            <span>Wet</span>
+                        </div>
+                    </div>
+                    <div class="status-container">
+                        <div class="status-item">
+                            <span class="status-label">Soil Moisture:</span>
+                            <span id="soilMoistureValue" class="status-value">0%</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Pump Status:</span>
+                            <span id="pumpStatus" class="status-value">OFF</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Rain Forecast:</span>
+                            <span id="rainForecast" class="status-value">0 mm</span>
+                        </div>
+                    </div>
 
-      <div class="card">
-        <h2>Soil Moisture Trend</h2>
-        <canvas id="moistureChart"></canvas>
-      </div>
+                    <!-- Pump Icon -->
+                    <div class="pump-container">
+                        <div id="pumpIcon" class="pump-off">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <button id="manualPumpBtn" class="pump-control-btn">Manual Control</button>
+                    </div>
+                </div>
 
-      <div class="card">
-        <h2>Temperature Trend</h2>
-        <canvas id="temperatureChart"></canvas>
-      </div>
+                <div class="card">
+                    <h2>Live Sensor Data</h2>
+                    <div class="table-container">
+                        <table id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Soil Moisture</th>
+                                    <th>Temperature</th>
+                                    <th>Pump Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Soil Moisture Trend</h2>
+                    <canvas id="moistureChart"></canvas>
+                </div>
+
+                <div class="card">
+                    <h2>Temperature Trend</h2>
+                    <canvas id="temperatureChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Powered by Arduino • Python • AWS • Chart.js</p>
+        </footer>
     </div>
 
-    <footer>Powered by Arduino • Python • AWS • Chart.js</footer>
+    <!-- Notifications Panel -->
+    <div id="notificationsPanel" class="notifications-panel hidden">
+        <div class="notifications-header">
+            <h3>Notifications</h3>
+            <button id="closeNotifications" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="notifications-list" id="notificationsList">
+            <!-- Notifications will be added here -->
+        </div>
+    </div>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
